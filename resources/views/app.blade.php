@@ -8,18 +8,7 @@
     <script src="{!! url('assets/semantic.min.js') !!}" type="text/javascript"></script>
 </head>
 <body>
-<nav class="ui pointing menu">
-    <div class="item">
-        <h3>Titulo do APP</h3>
-    </div>
-    <a href="" class="active item"><i class="idea icon"></i> Painel de Ideias</a>
-    <a href="" class="item"><i class="list layout icon"></i> Check Lists</a>
-    <a href="" class="item"><i class="file text outline icon"></i> Notas</a>
-
-    <div class="right menu">
-        <a href="" class="item"><i class="power icon"></i> Sair</a>
-    </div>
-</nav>
+@include('menu')
 
 <section class="ui two column stackable grid padded">
 
