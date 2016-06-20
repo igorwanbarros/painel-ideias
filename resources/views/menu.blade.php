@@ -8,13 +8,13 @@ $currentRoute = isset($app->getRoutes()[$currentRoute]) ? $app->getRoutes()[$cur
     <div class="item">
         <h3>Titulo do APP</h3>
     </div>
-    <a href="{!! url('ideias') !!}" class="{!! $currentRoute === '/ideias' ? 'active' : ''!!} item">
+    <a href="{!! url('ideias') !!}" class="{!! strpos($currentRoute, 'ideias') !== false ? 'active' : ''!!} item">
         <i class="idea icon"></i> Painel de Ideias
     </a>
-    <a href="{!! url('check-lists') !!}" class="{!! $currentRoute === '/check-lists' ? 'active' : ''!!} item">
+    <a href="{!! url('check-lists') !!}" class="{!! strpos($currentRoute, 'check-lists') !== false ? 'active' : ''!!} item">
         <i class="list layout icon"></i> Check Lists
     </a>
-    <a href="{!! url('notas') !!}" class="{!! $currentRoute === '/notas' ? 'active' : ''!!} item">
+    <a href="{!! url('notas') !!}" class="{!! strpos($currentRoute, 'notas') !== false ? 'active' : ''!!} item">
         <i class="file text outline icon"></i> Notas
     </a>
 
