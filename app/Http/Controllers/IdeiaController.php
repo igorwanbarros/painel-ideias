@@ -9,9 +9,11 @@ class IdeiaController extends Controller
 {
     public function index()
     {
-        $model = Tag::all();
-        return view('ideias.index')->with('model', $model);
+        $this->view['model'] = Tag::all();
+
+        return $this->render('ideias.index');
     }
+
 
     public function form()
     {
