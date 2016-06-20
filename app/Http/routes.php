@@ -17,4 +17,12 @@ $app->group([
         'uses' => 'IdeiaController@form'
     ]);
 
+    $app->get('/editar/{id}', [
+        'uses' => 'IdeiaController@form'
+    ]);
+
+    $app->post('/salvar', [
+        'uses' => 'IdeiaController@save'
+    ]);
+
 });

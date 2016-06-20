@@ -20,7 +20,7 @@ class Controller extends BaseController
         $pathInfo = $request->getPathInfo();
         $method   = $request->getMethod();
 
-        $this->view['currenteRoute'] = $method.$pathInfo;
+        $this->view['currentRoute'] = $method.$pathInfo;
     }
 
 
