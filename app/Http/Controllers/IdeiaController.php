@@ -32,15 +32,19 @@ class IdeiaController extends Controller
 
     public function save()
     {
-        $this->request->all();
+        $all = $this->request->all();
 
         $this->validate($this->request, ['nome' => 'required', 'descricao' => 'required']);
-        $this->model->fill($this->request->all());
 
-        if ($this->request->id > 0)
-            $this->model->update();
-        else
-            $this->model->save();
+        $this->model->saveOrUpdate($all);
+
+        return redirect('ideias');
+    }
+
+
+    public function destroy($id)
+    {
+        $this->model->destroy($id);
 
         return redirect('ideias');
     }

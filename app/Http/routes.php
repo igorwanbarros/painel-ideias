@@ -25,4 +25,12 @@ $app->group([
         'uses' => 'IdeiaController@save'
     ]);
 
+    $app->get('/excluir/{id}', [
+        'uses' => 'IdeiaController@destroy'
+    ]);
+
+    //$app->post('/excluir/{id?}', [
+    //    'uses' => 'IdeiaController@destroy'
+    //]);
+
 });

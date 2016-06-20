@@ -1,10 +1,8 @@
 <?php
 if (!isset($currentRoute))
     $currentRoute = '';
-
-$currentRoute = isset($app->getRoutes()[$currentRoute]) ? $app->getRoutes()[$currentRoute]['uri'] : [];
 ?>
-<nav class="ui pointing menu">
+<nav class="ui pointing inverted menu">
     <div class="item">
         <h3>Titulo do APP</h3>
     </div>

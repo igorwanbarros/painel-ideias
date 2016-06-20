@@ -1,12 +1,13 @@
 @extends('app')
 @section('content')
-    <table class="ui striped selectable table hover">
+    <table class="ui striped selectable table">
         <thead>
             <tr class="center aligned">
                 <th>Código</th>
                 <th>Nome</th>
                 <th>Descrição</th>
                 <th>Alterado em</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -32,16 +33,21 @@
                         {!! $row->updated_at !!}
                     </a>
                 </td>
+                <td>
+                    <a href="{!! url('ideias/excluir/' . $row->id) !!}" class="ui icon inverted red button">
+                        <i class="trash icon"></i>
+                    </a>
+                </td>
             </tr>
         @empty
             <tr>
-                <td colspan="2">Nenhum registro encontrado.</td>
+                <td colspan="5">Nenhum registro encontrado.</td>
             </tr>
         @endforelse
         </tbody>
         <tfoot>
             <tr>
-                <th colspan="4">
+                <th colspan="5">
                     <a href="{!! url('ideias/novo') !!}" class="ui right floated black animated button">
                         <div class="hidden content">Novo</div>
                         <div class="visible content"><i class="plus icon"></i></div>
