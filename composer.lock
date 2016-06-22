@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a0c19b514c6823f4fb0d221663246f0b",
-    "content-hash": "4e9fe6b4a2c2f0002d64bc56fe939a75",
+    "hash": "a046f3efac020364b98c05a4a43a49b7",
+    "content-hash": "7668acb42a25f802b30d86dfcc344028",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -160,6 +160,38 @@
                 "string"
             ],
             "time": "2015-11-06 14:35:42"
+        },
+        {
+            "name": "igorwanbarros/view-develop-php",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/igorwanbarros/view-develop-php.git",
+                "reference": "b1510bb669b1809e32d4c1f60ec818d54d475077"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/igorwanbarros/view-develop-php/zipball/b1510bb669b1809e32d4c1f60ec818d54d475077",
+                "reference": "b1510bb669b1809e32d4c1f60ec818d54d475077",
+                "shasum": ""
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "Igorwanbarros\\ViewDevelopPhp\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "wanderley",
+                    "email": "igorwanbarros@gmail.com"
+                }
+            ],
+            "time": "2016-06-21 16:04:48"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -3061,7 +3093,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "igorwanbarros/view-develop-php": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

@@ -56,6 +56,14 @@
             </tr>
         </tfoot>
     </table>
+    <script>
+        $('.tools[data-widget="collapse"]').on('click', function() {
+            $(this).parents('.ui.top')
+                .next('.ui.body')
+                .slideToggle(300)
+                ;
+        });
+    </script>
 @stop
 
 @section('lists')

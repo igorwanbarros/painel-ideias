@@ -13,7 +13,7 @@
 
 <section class="ui two column stackable grid padded">
 
-    <div class="ui twelve wide column divided segment">
+    <div class="ui twelve wide column divided">
         @yield('content')
     </div>
 
