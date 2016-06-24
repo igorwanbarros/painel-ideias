@@ -7,31 +7,64 @@ use Laravel\Lumen\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
-    protected $form;
-    protected $model;
-    protected $view;
-    protected $request;
+    public $headers;
+    public $form;
+    public $model;
+    public $view;
+    public $request;
+    public $title;
+    public $controllerName;
 
 
-    public function __construct(Request $request)
+    public function __construct(Request $request, $model = null)
     {
-        $this->request = $request;
+        $this->request  = $request;
+        $this->model    = $model;
+        $this->view     = new \stdClass();
 
         $pathInfo = $request->getPathInfo();
         $method   = $request->getMethod();
 
-        $this->view['currentRoute'] = $method.$pathInfo;
+        if (!isset($this->view->urlBase))
+            $this->_getUrlBase();
+
+        if (!isset($this->title) || $this->title == null)
+            $this->title = "%s {$this->controllerName}";
+
+        $this->view->currentRoute   = $method.$pathInfo;
     }
 
 
-    protected function render($view, array $array = [])
+    public function render($view, array $array = [])
     {
-        $params = $this->view;
+        $params = (array) $this->view;
 
         if (count($array) > 0)
             $params = array_merge($params, $array);
 
         return view($view)
             ->with($params);
+    }
+
+
+    private function _getUrlBase()
+    {
+        $className = $this->_getControllerName();
+
+        $this->view->urlBase = strtolower($className);
+    }
+
+
+    private function _getControllerName()
+    {
+        if ($this->controllerName == null) {
+            $className = get_called_class();
+            $className = substr($className, strrpos($className, '\\') + 1);
+            $className = str_replace('Controller', '', $className);
+
+            $this->controllerName = $className;
+        }
+
+        return $this->controllerName;
     }
 }

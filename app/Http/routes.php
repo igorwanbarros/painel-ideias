@@ -10,27 +10,27 @@ $app->group([
 ], function () use ($app) {
 
     $app->get('/', [
-        'uses' => 'IdeiaController@index'
+        'uses' => 'IdeiasController@index'
     ]);
 
     $app->get('/novo', [
-        'uses' => 'IdeiaController@form'
+        'uses' => 'IdeiasController@form'
     ]);
 
     $app->get('/editar/{id}', [
-        'uses' => 'IdeiaController@form'
+        'uses' => 'IdeiasController@form'
     ]);
 
     $app->post('/salvar', [
-        'uses' => 'IdeiaController@save'
+        'uses' => 'IdeiasController@save'
     ]);
 
     $app->get('/excluir/{id}', [
-        'uses' => 'IdeiaController@destroy'
+        'uses' => 'IdeiasController@destroy'
     ]);
 
     //$app->post('/excluir/{id?}', [
-    //    'uses' => 'IdeiaController@destroy'
+    //    'uses' => 'IdeiasController@destroy'
     //]);
 
 });
