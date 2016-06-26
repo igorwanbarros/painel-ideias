@@ -23,7 +23,8 @@
 </section>
 
 <script type="text/javascript">
-    $('select, .dropdow').dropdown();
+    $('select, .dropdown').dropdown();
+    $('.ui.popup, .ui.tooltip').popup();
 </script>
 </body>
 </html>

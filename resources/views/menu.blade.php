@@ -4,9 +4,9 @@ if (!isset($currentRoute))
 ?>
 <nav class="ui attached stackable inverted pointing menu">
     <div class="ui container">
-        <div class="item">
-            <h4>Titulo do APP</h4>
-        </div>
+        <a class="item header" href="{!! url('/') !!}">
+            Titulo do APP
+        </a>
         <a href="{!! url('ideias') !!}" class="{!! strpos($currentRoute, 'ideias') !== false ? 'active' : ''!!} item">
             <i class="idea icon"></i> Painel de Ideias
         </a>
@@ -17,11 +17,21 @@ if (!isset($currentRoute))
             <i class="file text outline icon"></i> Notas
         </a>
 
-        <a href="{!! url('logout') !!}" class="right item">
-            <i class="power icon"></i> Sair
-        </a>
+        <div class="ui dropdown right item tooltip" data-content="Configurações">
+            <i class="setting  icon"></i>
+
+            <i class="dropdown icon"></i>
+            <div class="menu">
+                <a href="{!! url('perfil') !!}" class="item">
+                    Perfil
+                </a>
+                <a href="{!! url('alterar-senha') !!}" class="item">
+                    Alterar Senha
+                </a>
+            </div>
+        </div>
         <a href="{!! url('logout') !!}" class="item">
-            <i class="check icon"></i> Bla
+            <i class="power icon"></i> Sair
         </a>
     </div>
 </nav>
