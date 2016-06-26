@@ -16,7 +16,7 @@ class IndexHelper extends ControllerHelpers
         $model  = $this->controller->model;
 
         $view->model    = $model->all();
-        $view->painel   = new PainelView('<i class="idea icon"></i> Ideias');
+        $view->painel   = new PainelView(str_replace('%s', '', $this->controller->title));
         $view->table    = TableView::source($this->controller->headers, $view->model)
             ->addHeader('actions', '')
             ->setLineLink(url($view->urlBase . '/editar/%s'));

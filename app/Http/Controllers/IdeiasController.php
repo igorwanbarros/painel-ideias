@@ -24,7 +24,7 @@ class IdeiasController extends Controller
             'updated_at'    => 'Atualizado em',
         ];
 
-        $this->title    = '<i class="idea icon"></i> %s uma Ideia';
+        $this->title    = '<i class="idea icon"></i> %s Ideia';
         $this->form     = IdeiasForm::source();
     }
 
