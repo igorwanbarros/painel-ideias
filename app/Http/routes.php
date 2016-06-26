@@ -57,3 +57,31 @@ $app->group([
     ]);
 
 });
+
+
+$app->group([
+    'namespace' => 'App\Http\Controllers',
+    'prefix'    => 'check-list'
+], function () use ($app) {
+
+    $app->get('/', [
+        'uses' => 'CheckListController@index'
+    ]);
+
+    $app->get('/novo', [
+        'uses' => 'CheckListController@form'
+    ]);
+
+    $app->get('/editar/{id}', [
+        'uses' => 'CheckListController@form'
+    ]);
+
+    $app->post('/salvar', [
+        'uses' => 'CheckListController@store'
+    ]);
+
+    $app->get('/excluir/{id}', [
+        'uses' => 'CheckListController@destroy'
+    ]);
+
+});

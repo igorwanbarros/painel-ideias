@@ -10,7 +10,7 @@ if (!isset($currentRoute))
         <a href="{!! url('ideias') !!}" class="{!! strpos($currentRoute, 'ideias') !== false ? 'active' : ''!!} item">
             <i class="idea icon"></i> Painel de Ideias
         </a>
-        <a href="{!! url('check-lists') !!}" class="{!! strpos($currentRoute, 'check-lists') !== false ? 'active' : ''!!} item">
+        <a href="{!! url('check-list') !!}" class="{!! strpos($currentRoute, 'check-list') !== false ? 'active' : ''!!} item">
             <i class="list layout icon"></i> Check Lists
         </a>
         <a href="{!! url('notas') !!}" class="{!! strpos($currentRoute, 'notas') !== false ? 'active' : ''!!} item">
