@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Views;
+namespace App\HtmlViews;
 
 use Igorwanbarros\ViewDevelopPhp\Table\TableView as Table;
 
