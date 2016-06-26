@@ -3,12 +3,9 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Ideia extends ModelBase
 {
-    use SoftDeletes;
-
     protected $table = 'ideia';
 
     protected $fillable = [
