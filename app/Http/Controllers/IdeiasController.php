@@ -21,6 +21,7 @@ class IdeiasController extends Controller
             'id'            => 'Código',
             'nome'          => 'Nome',
             'descricao'     => 'Descrição',
+            'tags'          => 'Tags',
             'updated_at'    => 'Atualizado em',
         ];
 
@@ -31,7 +32,16 @@ class IdeiasController extends Controller
 
     public function index()
     {
-        return IndexHelper::support($this);
+        return IndexHelper::support($this, null, function($controller) {
+            $controller->view->table->callback(function($row) {
+                $data = $row->getData();
+                $tags = null;
+                foreach ($data->tags as $tag)
+                    $tags .= $tag->tag->nome . ', ';
+
+                $data->tags = substr($tags, 0, -2);
+            });
+        });
     }
 
 

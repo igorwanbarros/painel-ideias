@@ -15,4 +15,10 @@ class Ideia extends ModelBase
         'nome',
         'descricao',
     ];
+
+
+    public function tags()
+    {
+        return $this->hasMany(IdeiaTag::class);
+    }
 }
