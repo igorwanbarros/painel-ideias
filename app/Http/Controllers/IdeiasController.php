@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 
-use App\HtmlViews\Forms\IdeiasForm;
 use App\Models\Ideia;
 use Illuminate\Http\Request;
 use App\Http\Helpers\FormHelper;
 use App\Http\Helpers\IndexHelper;
+use App\Http\Helpers\StoreHelper;
+use App\Http\Helpers\DestroyHelper;
+use App\HtmlViews\Forms\IdeiasForm;
 
 class IdeiasController extends Controller
 {
@@ -39,22 +41,14 @@ class IdeiasController extends Controller
     }
 
 
-    public function save()
+    public function store()
     {
-        $all = $this->request->all();
-
-        $this->validate($this->request, ['nome' => 'required', 'descricao' => 'required']);
-
-        $this->model->saveOrUpdate($all);
-
-        return redirect('ideias');
+        return StoreHelper::support($this);
     }
 
 
     public function destroy($id)
     {
-        $this->model->destroy($id);
-
-        return redirect('ideias');
+        return DestroyHelper::support($this, $id);
     }
 }
