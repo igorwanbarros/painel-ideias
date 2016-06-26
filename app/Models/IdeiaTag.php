@@ -3,6 +3,8 @@
 namespace App\Models;
 
 
+use Carbon\Carbon;
+
 class IdeiaTag extends ModelBase
 {
     protected $table = 'ideia_tag';
@@ -17,5 +19,12 @@ class IdeiaTag extends ModelBase
     public function tag()
     {
         return $this->belongsTo(Tag::class);
+    }
+
+
+    public function getUpdatedAtAttribute($value)
+    {
+        $value = Carbon::createFromTimestamp(strtotime($value));
+        return $value->diffForHumans();
     }
 }
