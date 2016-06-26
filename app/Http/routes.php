@@ -22,15 +22,38 @@ $app->group([
     ]);
 
     $app->post('/salvar', [
-        'uses' => 'IdeiasController@save'
+        'uses' => 'IdeiasController@store'
     ]);
 
     $app->get('/excluir/{id}', [
         'uses' => 'IdeiasController@destroy'
     ]);
 
-    //$app->post('/excluir/{id?}', [
-    //    'uses' => 'IdeiasController@destroy'
-    //]);
+});
+
+$app->group([
+    'namespace' => 'App\Http\Controllers',
+    'prefix'    => 'tags'
+], function () use ($app) {
+
+    $app->get('/', [
+        'uses' => 'TagsController@index'
+    ]);
+
+    $app->get('/novo', [
+        'uses' => 'TagsController@form'
+    ]);
+
+    $app->get('/editar/{id}', [
+        'uses' => 'TagsController@form'
+    ]);
+
+    $app->post('/salvar', [
+        'uses' => 'TagsController@store'
+    ]);
+
+    $app->get('/excluir/{id}', [
+        'uses' => 'TagsController@destroy'
+    ]);
 
 });
