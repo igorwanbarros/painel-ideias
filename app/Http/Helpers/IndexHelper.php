@@ -3,13 +3,15 @@
 namespace App\Http\Helpers;
 
 
-use App\Views\PainelView;
-use App\Views\TableView;
+use App\HtmlViews\PainelView;
+use App\HtmlViews\TableView;
 
 class IndexHelper extends ControllerHelpers
 {
     public function logic()
     {
+        $this->controller->resourceView = 'index-default';
+
         $view   = $this->controller->view;
         $model  = $this->controller->model;
 
@@ -21,6 +23,6 @@ class IndexHelper extends ControllerHelpers
 
         $this->execCallable();
 
-        return $this->controller->render('index');
+        return $this->controller->render($this->controller->resourceView);
     }
 }

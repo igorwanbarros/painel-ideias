@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\HtmlViews\Forms\IdeiasForm;
 use App\Models\Ideia;
 use Illuminate\Http\Request;
 use App\Http\Helpers\FormHelper;
@@ -14,14 +15,15 @@ class IdeiasController extends Controller
     {
         parent::__construct($request, $ideia);
 
-        $this->headers = [
+        $this->headers  = [
             'id'            => 'Código',
             'nome'          => 'Nome',
             'descricao'     => 'Descrição',
             'updated_at'    => 'Atualizado em',
         ];
 
-        $this->title = '<i class="idea icon"></i> %s uma Ideia';
+        $this->title    = '<i class="idea icon"></i> %s uma Ideia';
+        $this->form     = IdeiasForm::source();
     }
 
 
