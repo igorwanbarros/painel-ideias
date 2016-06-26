@@ -22,10 +22,10 @@ if (!isset($currentRoute))
 
             <i class="dropdown icon"></i>
             <div class="menu">
-                <a href="{!! url('perfil') !!}" class="item">
+                <a href="{!! url('perfil') !!}" class="{!! strpos($currentRoute, 'perfil') !== false ? 'active' : ''!!} item">
                     Perfil
                 </a>
-                <a href="{!! url('alterar-senha') !!}" class="item">
+                <a href="{!! url('alterar-senha') !!}" class="{!! strpos($currentRoute, 'alterar-senha') !== false ? 'active' : ''!!} item">
                     Alterar Senha
                 </a>
             </div>
