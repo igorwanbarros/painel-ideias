@@ -12,6 +12,9 @@ class DestroyHelper extends ControllerHelpers
 
         $this->controller->model->destroy($id);
 
+        if ($this->controller->request->ajax())
+            return ['status' => true];
+
         return redirect($this->controller->view->urlBase);
     }
 
