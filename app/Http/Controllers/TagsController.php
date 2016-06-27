@@ -19,7 +19,6 @@ class TagsController extends Controller
         $this->headers  = [
             'id'            => 'Código',
             'nome'          => 'Nome',
-            'tipo'          => 'Tipo',
             'updated_at'    => 'Atualizado em',
         ];
         $this->title    = '<i class="tags icon"></i> %s Tag';

@@ -22,7 +22,7 @@ class IdeiasController extends Controller
             'nome'          => 'Nome',
             'descricao'     => 'Descrição',
             'tags'          => 'Tags',
-            'updated_at'    => 'Atualizado em',
+            'updated_at'    => 'Atualizado há',
         ];
 
         $this->title    = '<i class="idea icon"></i> %s Ideia';

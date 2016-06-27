@@ -16,7 +16,6 @@ class TableTag extends Migration
         Schema::create('tag', function(Blueprint $tb) {
             $tb->increments('id');
             $tb->string('nome');
-            $tb->string('tipo');
             $tb->timestamps();
             $tb->softDeletes();
         });
