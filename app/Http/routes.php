@@ -85,3 +85,30 @@ $app->group([
     ]);
 
 });
+
+$app->group([
+    'namespace' => 'App\Http\Controllers',
+    'prefix'    => 'colunas'
+], function () use ($app) {
+
+    $app->get('/', [
+        'uses' => 'ColunasController@index'
+    ]);
+
+    $app->get('/novo', [
+        'uses' => 'ColunasController@form'
+    ]);
+
+    $app->get('/editar/{id}', [
+        'uses' => 'ColunasController@form'
+    ]);
+
+    $app->post('/salvar', [
+        'uses' => 'ColunasController@store'
+    ]);
+
+    $app->get('/excluir/{id}', [
+        'uses' => 'ColunasController@destroy'
+    ]);
+
+});

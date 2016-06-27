@@ -13,9 +13,9 @@ use App\HtmlViews\Forms\IdeiasForm;
 
 class IdeiasController extends Controller
 {
-    public function __construct(Request $request, Ideia $ideia)
+    public function __construct(Request $request, Ideia $colunas)
     {
-        parent::__construct($request, $ideia);
+        parent::__construct($request, $colunas);
 
         $this->headers  = [
             'id'            => 'Código',
