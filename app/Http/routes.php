@@ -86,6 +86,7 @@ $app->group([
 
 });
 
+
 $app->group([
     'namespace' => 'App\Http\Controllers',
     'prefix'    => 'colunas'
@@ -109,6 +110,34 @@ $app->group([
 
     $app->get('/excluir/{id}', [
         'uses' => 'ColunasController@destroy'
+    ]);
+
+});
+
+
+$app->group([
+    'namespace' => 'App\Http\Controllers',
+    'prefix'    => 'notas'
+], function () use ($app) {
+
+    $app->get('/', [
+        'uses' => 'NotasController@index'
+    ]);
+
+    $app->get('/novo', [
+        'uses' => 'NotasController@form'
+    ]);
+
+    $app->get('/editar/{id}', [
+        'uses' => 'NotasController@form'
+    ]);
+
+    $app->post('/salvar', [
+        'uses' => 'NotasController@store'
+    ]);
+
+    $app->get('/excluir/{id}', [
+        'uses' => 'NotasController@destroy'
     ]);
 
 });
