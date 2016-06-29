@@ -1,7 +1,8 @@
-@extends('app')
+@extends($isAjax ? 'app-ajax' : 'app')
 @section('content')
     {!! $widget !!}
 
+    @if (!$isAjax)
     <div class="ui equal width grid">
         <div class="column">
             <a href="{!! url($urlBase) !!}" class="ui animated button">
@@ -16,6 +17,7 @@
             </a>
         </div>
     </div>
+    @endif
 @stop
 
 @section('lists')

@@ -22,6 +22,8 @@ class Controller extends BaseController
         $this->model    = $model;
         $this->view     = new \stdClass();
 
+        $this->view->isAjax = $this->request->ajax();
+
         $pathInfo = $request->getPathInfo();
         $method   = $request->getMethod();
 
@@ -42,8 +44,7 @@ class Controller extends BaseController
         if (count($array) > 0)
             $params = array_merge($params, $array);
 
-        return view($view)
-            ->with($params);
+        return view($view)->with($params);
     }
 
 

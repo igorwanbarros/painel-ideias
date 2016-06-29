@@ -18,9 +18,13 @@ class FormHelper extends ControllerHelpers
         $view->model = $model->findOrNew($id);
 
         $title = sprintf($this->controller->title, $id ? 'Editar' : 'Adicionar');
+        $form  = $this->controller->form->fill($view->model);
 
         $view->widget = new PainelView($title);
-        $view->widget->setBody($this->controller->form->fill($view->model));
+        $view->widget->setBody($form);
+
+        if ($view->isAjax)
+            $view->widget = $form;
 
         $this->execCallable();
 
