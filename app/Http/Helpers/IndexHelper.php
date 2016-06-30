@@ -16,10 +16,17 @@ class IndexHelper extends ControllerHelpers
         $model  = $this->controller->model;
 
         $view->model    = $model->all();
-        $view->painel   = new PainelView(str_replace('%s', '', $this->controller->title));
+        $view->widget   = new PainelView(str_replace('%s', '', $this->controller->title));
         $view->table    = TableView::source($this->controller->headers, $view->model)
             ->addHeader('actions', '')
+            ->callback(function ($row) use ($view) {
+                $data = $row->getData();
+                $data->actions = '<a href="' . url($view->urlBase . '/excluir/' . $data->id) . '" ' .
+                    'class="ui mini icon red button"><i class="trash icon"></i></a>';
+            })
             ->setLineLink(url($view->urlBase . '/editar/%s'));
+
+        $view->widget->setBody($view->table);
 
         $this->execCallable();
 

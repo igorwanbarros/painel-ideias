@@ -25,7 +25,6 @@
 <section class="ui two column stackable grid padded">
 
     <div class="ui twelve wide column divided">
-        <a href="{!! url('tags/novo') !!}" class="ui button red link-modal-ajax" data-modal-title="Adicionar Tag">bla2</a>
         @yield('content')
     </div>
 
@@ -36,58 +35,73 @@
 
 @include('modal')
 
+<span id="urlBase" data-url="{!! url() !!}"></span>
+
 <script type="text/javascript">
-    app.btnRemover();
+
+    var app = new App();
+
+    $(document)
+            .ready(app.init())
+            .ajaxComplete(app.init());
     var modal = app.make('modal');
+    $(document).ready(function () {
 
-    $('a.link-modal').on('click', function (event) {
-        event.preventDefault();
-        var $this   = $(this),
-            titulo  = $this.data('modal-title') !== undefined ? $this.data('modal-title') : '';
+        app.btnRemover();
 
-        modal.transitions('fade left')
-            .blurring()
-            .setTitle(titulo)
-            .show();
-    });
-    $('a.link-modal-ajax').on('click', function (event) {
-       event.preventDefault();
-        var $this = $(this),
-            titulo = $this.data('modal-title') !== undefined ? $this.data('modal-title') : '';
+        $('a.link-modal').on('click', function (event) {
+            event.preventDefault();
+            var $this   = $(this),
+                titulo  = $this.data('modal-title') !== undefined ? $this.data('modal-title') : '';
 
-        $.get($this.attr('href'), function(response) {
             modal.transitions('fade left')
-                    .blurring()
-                    .setTitle(titulo)
-                    .setContent(response)
-                    .show();
+                .blurring()
+                .setTitle(titulo)
+                .show();
         });
-    });
-    $(modal.appModal).on('submit', 'form', function(event) {
-        event.preventDefault();
+        $('a.link-modal-ajax').on('click', function (event) {
+           event.preventDefault();
+            var $this = $(this),
+                titulo = $this.data('modal-title') !== undefined ? $this.data('modal-title') : '';
 
-        var $this = $(this),
-            params = $this.serialize();
+            $.get($this.attr('href'), function(response) {
+                modal.transitions('fade left')
+                        .blurring()
+                        .setTitle(titulo)
+                        .setContent(response)
+                        .show();
+            });
+        });
+        $(modal.appModal).on('submit', 'form', function(event) {
+            event.preventDefault();
 
-        $.post($this.attr('action'), params, function(response) {
-            var options = {
-                title: 'Alerta',
-                text: 'Não consegui adicionar este registro',
-                timer: 2000,
-                type: 'warning'
-            };
-            if (response) {
-                options = {
-                    title: 'Sucesso',
-                    text: 'Registro adicionado',
+            var $this = $(this),
+                params = $this.serialize();
+
+            $.post($this.attr('action'), params, function(response) {
+                var options = {
+                    title: 'Alerta',
+                    text: 'Não consegui adicionar este registro',
                     timer: 2000,
-                    type: 'success'
+                    type: 'warning'
                 };
+                if (response) {
+                    options = {
+                        title: 'Sucesso',
+                        text: 'Registro adicionado',
+                        timer: 2000,
+                        type: 'success'
+                    };
 
-                modal.close();
-            }
+                    modal.close();
+                }
 
-            swal(options);
+                swal(options);
+                if ($this.find('[data-widget="reload"]').length > 0)
+                    window.setTimeout(function () {
+                        window.location.reload();
+                    }, 2100);
+            });
         });
     });
 </script>

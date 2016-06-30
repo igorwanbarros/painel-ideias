@@ -1,5 +1,6 @@
 function App()
 {
+    this.urlBase    = undefined;
     var self        = this,
         factory     = {
             modal: AppModal
@@ -11,6 +12,7 @@ function App()
         $('select, .dropdown').dropdown();
         $('.ui.popup, .ui.tooltip').popup();
         $('.ui.modal').modal();
+        self.urlBase = $('#urlBase').data();
     };
 
 
@@ -178,9 +180,3 @@ function AppModal()
 
     this.enableButtons(false, true);
 }
-
-var app = new App();
-
-$(document)
-    .ready(app.init())
-    .ajaxComplete(app.init());

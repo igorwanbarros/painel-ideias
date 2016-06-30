@@ -24,6 +24,8 @@ class NotasController extends Controller
         ];
         $this->title    = '<i class="file text icon"></i> %s Nota';
         $this->form     = NotasForm::source();
+
+        $this->view->btnAddAjax = true;
     }
 
 

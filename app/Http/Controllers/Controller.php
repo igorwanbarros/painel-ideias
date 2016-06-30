@@ -34,6 +34,7 @@ class Controller extends BaseController
             $this->title = "%s {$this->controllerName}";
 
         $this->view->currentRoute   = $method.$pathInfo;
+        $this->view->btnAddAjax     = false;
     }
 
 

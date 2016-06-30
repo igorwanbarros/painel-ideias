@@ -1,23 +1,21 @@
-@extends('app')
+@extends($isAjax ? 'app-ajax' : 'app')
 @section('content')
-    <?php
-        $table
-            ->callback(function($row) use($urlBase) {
-                $data = $row->getData();
-                $data->actions = '<a href="' . url($urlBase . '/excluir/' . $data->id) .'" ' .
-                                    'class="ui mini icon red button"><i class="trash icon"></i></a>';
-            })
-    ?>
 
-    {!! $painel->setBody($table) !!}
+    {!! $widget !!}
 
-    <a href="{!! url($urlBase . '/novo') !!}" class="ui right floated black vertical animated button">
+    @if (!$isAjax)
+    <a href="{!! url($urlBase . '/novo') !!}"
+       class="ui right floated black vertical animated button {!! $btnAddAjax ? 'link-modal-ajax' : '' !!}"
+       data-modal-title="Novo">
         <div class="hidden content">Novo</div>
         <div class="visible content"><i class="plus icon"></i></div>
     </a>
+    @endif
 
 @stop
 
-@section('lists')
-    @include('ideias.lists')
-@stop
+@if (!$isAjax)
+    @section('lists')
+        @include('lists')
+    @stop
+@endif

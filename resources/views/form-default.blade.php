@@ -1,5 +1,6 @@
 @extends($isAjax ? 'app-ajax' : 'app')
 @section('content')
+
     {!! $widget !!}
 
     @if (!$isAjax)
@@ -20,6 +21,9 @@
     @endif
 @stop
 
-@section('lists')
-    @include('ideias.lists')
-@stop
+@if (!$isAjax)
+    @section('lists')
+
+        @include('lists')
+    @stop
+@endif
