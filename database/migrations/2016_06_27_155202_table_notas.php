@@ -17,6 +17,7 @@ class TableNotas extends Migration
             $tb->increments('id');
             $tb->string('titulo');
             $tb->string('descricao')->nullable();
+            $tb->tinyInteger('realizado');
             $tb->timestamps();
             $tb->softDeletes();
         });

@@ -12,6 +12,7 @@ function App()
         $('select, .dropdown').dropdown();
         $('.ui.popup, .ui.tooltip').popup();
         $('.ui.modal').modal();
+        $('.ui.checkbox, input[type="checkbox"]').checkbox();
         self.urlBase = $('#urlBase').data();
     };
 

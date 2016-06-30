@@ -42,9 +42,11 @@
     var app = new App();
 
     $(document)
-            .ready(app.init())
-            .ajaxComplete(app.init());
+        .ready(app.init)
+        .ajaxComplete(app.init);
+
     var modal = app.make('modal');
+
     $(document).ready(function () {
 
         app.btnRemover();
