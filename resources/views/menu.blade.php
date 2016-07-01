@@ -22,6 +22,9 @@ if (!isset($currentRoute))
 
             <i class="dropdown icon"></i>
             <div class="menu">
+                <a href="{!! url('configuracoes') !!}" class="{!! strpos($currentRoute, 'configuracoes') !== false ? 'active' : ''!!} item">
+                    Configurações
+                </a>
                 <a href="{!! url('perfil') !!}" class="{!! strpos($currentRoute, 'perfil') !== false ? 'active' : ''!!} item">
                     Perfil
                 </a>

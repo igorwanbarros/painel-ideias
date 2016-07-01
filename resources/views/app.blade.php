@@ -24,6 +24,7 @@
     <script src="{!! url('assets/app/app.js') !!}" type="text/javascript"></script>
 </head>
 <body>
+<span id="urlBase" data-url="{!! url() !!}"></span>
 @include('menu')
 
 <section class="ui two column stackable grid padded">
@@ -39,7 +40,6 @@
 
 @include('modal')
 
-<span id="urlBase" data-url="{!! url() !!}"></span>
 
 <script type="text/javascript">
 
