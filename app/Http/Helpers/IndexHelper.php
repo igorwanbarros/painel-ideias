@@ -18,7 +18,7 @@ class IndexHelper extends ControllerHelpers
         $view->model    = $model->all();
         $view->widget   = new PainelView(str_replace('%s', '', $this->controller->title));
 
-        if (!$view->table instanceof TableView)
+        if (!isset($view->table))
             $view->table    = TableView::source($this->controller->headers, $view->model)
                 ->addHeader('actions', '')
                 ->callback(function ($row) use ($view) {
