@@ -4,8 +4,18 @@ function App()
     var self        = this,
         factory     = {
             modal: AppModal
+        },
+        messageConfig = {
+            text: '',
+            heading: '',
+            showHideTransition: 'slide',
+            allowToastClose: true,
+            hideAfter: 6000,
+            stack: 8,
+            position: 'bottom-right',
+            textAlign: 'left',
+            loader: true
         };
-
 
     App.prototype.init = function()
     {
@@ -15,7 +25,6 @@ function App()
         $('.ui.checkbox, input[type="checkbox"]').checkbox();
         self.urlBase = $('#urlBase').data();
     };
-
 
     App.prototype.make = function (object) {
         object = object.toLowerCase();
@@ -28,6 +37,31 @@ function App()
         return new factory[object];
     };
 
+    App.prototype.messageInfo = function(title, text)
+    {
+        messageConfig.heading   = title;
+        messageConfig.text      = text;
+        messageConfig.icon      = 'info';
+        messageConfig.loaderBg  = '#6EA3BD';//#e7f3b9'
+
+
+        $.toast(messageConfig);
+
+        return this;
+    };
+
+    App.prototype.messageWarning = function(title, text)
+    {
+        messageConfig.heading   = title;
+        messageConfig.text      = text;
+        messageConfig.icon      = 'warning';
+        messageConfig.loaderBg  = '#6EA3BD';//#e7f3b9'
+
+
+        $.toast(messageConfig);
+
+        return this;
+    };
 
     App.prototype.btnRemover = function()
     {
@@ -63,12 +97,14 @@ function App()
                     });
 
                 } else {
-                    swal({
-                        title:  'Exclusão Cancelada',
-                        text :  'Não se preoculpe nada foi excluído',
-                        type:   'error',
-                        timer:  2000
-                    });
+//                    swal({
+//                        title:  'Exclusão Cancelada',
+//                        text :  'Não se preoculpe nada foi excluído',
+//                        type:   'error',
+//                        timer:  2000
+//                    });
+                    self.messageInfo('Exclusão Cancelada', 'Não se preoculpe nada foi excluido');
+                    return true;
                 }
             });
         });

@@ -15,6 +15,10 @@
     <link rel="stylesheet" href="{!! url('assets/sweetalert/sweetalert.css') !!}"/>
     <script src="{!! url('assets/sweetalert/sweetalert.min.js') !!}" type="text/javascript"></script>
 
+    <!-- toastr -->
+    <link rel="stylesheet" href="{!! url('assets/toast/jquery.toast.css') !!}"/>
+    <script src="{!! url('assets/toast/jquery.toast.js') !!}" type="text/javascript"></script>
+
     <!-- app -->
     <link rel="stylesheet" href="{!! url('assets/app/app.css') !!}"/>
     <script src="{!! url('assets/app/app.js') !!}" type="text/javascript"></script>
@@ -48,7 +52,6 @@
     var modal = app.make('modal');
 
     $(document).ready(function () {
-
         app.btnRemover();
 
         $('a.link-modal').on('click', function (event) {
@@ -81,28 +84,18 @@
                 params = $this.serialize();
 
             $.post($this.attr('action'), params, function(response) {
-                var options = {
-                    title: 'Alerta',
-                    text: 'Não consegui adicionar este registro',
-                    timer: 2000,
-                    type: 'warning'
-                };
                 if (response) {
-                    options = {
-                        title: 'Sucesso',
-                        text: 'Registro adicionado',
-                        timer: 2000,
-                        type: 'success'
-                    };
+                    app.messageInfo('Sucesso', 'Registro adicionado');
 
                     modal.close();
+                    if ($this.find('[data-widget="reload"]').length > 0)
+                        window.setTimeout(function () {
+                            window.location.reload();
+                        }, 2100);
+                    return true;
                 }
 
-                swal(options);
-                if ($this.find('[data-widget="reload"]').length > 0)
-                    window.setTimeout(function () {
-                        window.location.reload();
-                    }, 2100);
+                app.messageWarning('Alerta', 'Não consegui adicionar este registro');
             });
         });
     });
