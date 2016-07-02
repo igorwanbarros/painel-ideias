@@ -17,21 +17,9 @@ if (!isset($currentRoute))
             <i class="file text outline icon"></i> Notas
         </a>
 
-        <div class="ui dropdown right item tooltip" data-content="Configurações">
-            <i class="setting  icon"></i>
-
-            <i class="dropdown icon"></i>
-            <div class="menu">
-                <a href="{!! url('configuracoes') !!}" class="{!! strpos($currentRoute, 'configuracoes') !== false ? 'active' : ''!!} item">
-                    Configurações
-                </a>
-                <a href="{!! url('perfil') !!}" class="{!! strpos($currentRoute, 'perfil') !== false ? 'active' : ''!!} item">
-                    Perfil
-                </a>
-                <a href="{!! url('alterar-senha') !!}" class="{!! strpos($currentRoute, 'alterar-senha') !== false ? 'active' : ''!!} item">
-                    Alterar Senha
-                </a>
-            </div>
+        <a href="{!! url('preferencias') !!}" class="right {!! strpos($currentRoute, 'configuracoes') !== false ? 'active' : ''!!} item">
+            <i class="options icon"></i> Preferências
+        </a>
         </div>
         <a href="{!! url('logout') !!}" class="item">
             <i class="power icon"></i> Sair

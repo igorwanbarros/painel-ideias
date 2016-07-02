@@ -145,31 +145,31 @@ $app->group([
 
 $app->group([
     'namespace' => 'App\Http\Controllers',
-    'prefix'    => 'configuracoes'
+    'prefix'    => 'preferencias'
 ], function () use ($app) {
 
     $app->get('/', [
-        'uses' => 'ConfiguracoesController@index'
+        'uses' => 'PreferenciasController@index'
     ]);
 
     $app->get('/colunas-usuario', [
-        'uses' => 'ConfiguracoesController@colunas'
+        'uses' => 'PreferenciasController@colunas'
     ]);
 
     $app->get('/perfil-usuario', [
-        'uses' => 'ConfiguracoesController@colunas'
+        'uses' => 'PreferenciasController@colunas'
     ]);
 
     $app->get('/alterar-senha', [
-        'uses' => 'ConfiguracoesController@colunas'
+        'uses' => 'PreferenciasController@colunas'
     ]);
 
     $app->post('/salvar', [
-        'uses' => 'ConfiguracoesController@store'
+        'uses' => 'PreferenciasController@store'
     ]);
 
     $app->get('/excluir/{id}', [
-        'uses' => 'ConfiguracoesController@destroy'
+        'uses' => 'PreferenciasController@destroy'
     ]);
 
 });

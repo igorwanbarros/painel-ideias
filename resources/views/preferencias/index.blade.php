@@ -13,7 +13,7 @@
     </div>
 
     <div class="ui tab segment active" data-tab="perfil-usuario">
-        @include('configuracoes.colunas')
+        @include('preferencias.colunas')
     </div>
 
     <div class="ui tab segment" data-tab="colunas-usuario">
@@ -31,7 +31,7 @@
             .tab({
                     //contex: '.dynamic.example',
                     auto:true,
-                    path: $('#urlBase').data('url') + '/configuracoes/'
+                    path: $('#urlBase').data('url') + '/preferencias/'
                 });
     </script>
 @stop

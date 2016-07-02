@@ -3,6 +3,6 @@ body {
     padding: 0em 1em 1em 1em;
 }
 
-.hidden {
+.app.hidden {
     display: none;
 }
