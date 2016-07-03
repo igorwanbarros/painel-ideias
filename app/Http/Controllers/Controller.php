@@ -40,6 +40,9 @@ class Controller extends BaseController
 
     public function render($view, array $array = [])
     {
+        if (!isset($this->view->title))
+            $this->view->title = $this->title;
+
         $params = (array) $this->view;
 
         if (count($array) > 0)
