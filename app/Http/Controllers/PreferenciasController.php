@@ -4,8 +4,6 @@
 namespace App\Http\Controllers;
 
 
-use App\HtmlViews\Forms\ColunasForm;
-
 class PreferenciasController extends Controller
 {
     public function index()
@@ -15,7 +13,14 @@ class PreferenciasController extends Controller
 
     public function colunas()
     {
-        $this->view->widget = ColunasForm::source();
+        $colunasController  = app(ColunasController::class);
+        $this->view->table  = $colunasController->index();
+        $this->title        = str_replace('%s Coluna', 'Colunas', $colunasController->title);
+        $form               = $colunasController->form;
+        $form->addAttributes('data-widget', 'ajax');
+
+        $this->view->widget = $form;
+
         return $this->render('preferencias.colunas');
     }
 }

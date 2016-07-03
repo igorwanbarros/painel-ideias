@@ -20,7 +20,7 @@ class ColunasController extends Controller
         $this->headers  = [
             'id'            => 'Código',
             'nome'          => 'Título',
-            'painel'     => 'Painel',
+            'painel'        => 'Painel',
             'updated_at'    => 'Atualizado há',
         ];
 
@@ -31,7 +31,10 @@ class ColunasController extends Controller
 
     public function index()
     {
-        return IndexHelper::support($this);
+        return IndexHelper::support($this, null, function($controller) {
+            if ($controller->view->isAjax)
+                $controller->view->widget = $controller->view->table;
+        });
     }
 
 

@@ -29,9 +29,32 @@
                 $(this).addClass('active');
             })
             .tab({
-                    //contex: '.dynamic.example',
-                    auto:true,
-                    path: $('#urlBase').data('url') + '/preferencias/'
+                    cache:  false,
+                    auto:   true,
+                    path:   $('#urlBase').data('url') + '/preferencias/'
                 });
+
+        $('body').on('submit', 'form[data-widget="ajax"]', function (event) {
+            event.preventDefault();
+            var $this   = $(this),
+                tabName = $('.ui.tab.segment.active').data('tab'),
+                action  = $this.attr('action');
+
+            $.ajax({
+                method:  'POST',
+                url:     action,
+                data:    $this.serialize(),
+                success: function(response) {
+                    if (!response.status) {
+                        app.messageWarning('Alerta', 'Não consegui salvar suas informações, por favor tente novamente');
+
+                        return false;
+                    }
+
+                    $('.item[data-tab="' + tabName + '"]').trigger('click');
+                    app.messageInfo('Sucesso', 'Registro adicionado');
+                }
+            });
+        });
     </script>
 @stop

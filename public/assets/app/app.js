@@ -65,7 +65,7 @@ function App()
 
     App.prototype.btnRemover = function()
     {
-        $('.ui.icon.red').on('click', function(event) {
+        $('body').on('click', '.ui.icon.red', function(event) {
             event.preventDefault();
 
             var $this = $(this);
