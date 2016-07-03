@@ -1,8 +1,9 @@
 <?php
 
-$app->get('/', function () use ($app) {
-    return view('app');
-});
+$app->get('/', [
+    'namespace' => 'App\Http\Controllers',
+    'uses'      => 'AuthController@index'
+]);
 
 $app->group([
     'namespace' => 'App\Http\Controllers',
