@@ -281,6 +281,43 @@ $app->group([
  | rotas do
  |-----------------------------------------------------------------------------
 */
+$app->group([
+    'namespace' => 'App\Http\Controllers',
+    'prefix'    => 'usuario'
+], function () use ($app) {
+
+    $app->get('/', [
+        'middleware'    => 'auth:usuario_',
+        'uses'          => 'UserController@index'
+    ]);
+
+    $app->get('/novo', [
+        'middleware'    => 'auth:usuario_',
+        'uses'          => 'UserController@form'
+    ]);
+
+    $app->get('/editar/{id}', [
+        'middleware'    => 'auth:usuario_',
+        'uses'          => 'UserController@form'
+    ]);
+
+    $app->post('/salvar', [
+        'middleware'    => 'auth:usuario_',
+        'uses'          => 'UserController@store'
+    ]);
+
+    $app->get('/excluir/{id}', [
+        'middleware'    => 'auth:usuario_',
+        'uses'          => 'UserController@destroy'
+    ]);
+});
+
+
+/*
+ |-----------------------------------------------------------------------------
+ | rotas do
+ |-----------------------------------------------------------------------------
+*/
 //$app->group([
 //    'namespace' => 'App\Http\Controllers',
 //    'prefix'    => ''
