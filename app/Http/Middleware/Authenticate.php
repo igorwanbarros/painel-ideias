@@ -40,12 +40,15 @@ class Authenticate
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
+                $previous = $request->session()->get('_previous');
+                $isLogout = isset($previous['url']) && strpos($previous['url'], 'logout') !== false ? true : false;
+
                 // Lumen has no Redirector::guest(), this line is put the intended URL to a session like Redirector::guest() does
                 app('session')->put('url.intended', app('url')->full());
                 // Set your login URL here
                 return redirect()->route('login')
                     ->withErrors([
-                        'error' => 'Realize o login para acessar a página solicitada.'
+                        'error' => $isLogout ? '' : 'Realize o login para acessar a página solicitada.'
                     ]);
             }
         }
