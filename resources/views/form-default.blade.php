@@ -1,6 +1,10 @@
 @extends($isAjax ? 'app-ajax' : 'app')
 @section('content')
 
+    @if (count($errors->all()) > 0 && is_subclass_of($widget->getBody(), App\HtmlViews\Forms\FormLumen::class))
+        <?php $widget->getBody()->setErrors($errors);?>
+    @endif
+
     {!! $widget !!}
 
     @if (!$isAjax)

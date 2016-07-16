@@ -11,9 +11,7 @@ class StoreHelper extends ControllerHelpers
     {
         $this->controller->all = $this->controller->request->all();
 
-        //TODO: implementar retorno do metodo validate
-        //TODO: adicionar método publico para o validate
-        //$this->controller->validate($this->controller->request, []);
+        $this->controller->validate($this->controller->request, $this->controller->form->getRules());
 
         $this->execCallable();
 
