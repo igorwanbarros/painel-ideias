@@ -18,11 +18,11 @@ class FormHelper extends ControllerHelpers
         $view->model = $model->findOrNew($id);
 
         $title = sprintf($this->controller->title, $id ? 'Editar' : 'Adicionar');
-        //dd($this->controller->request);
-        $form  = $this->controller->form->fill($this->controller->request->all());
-        //if ($id) {
-        //    $form  = $this->controller->form->fill($view->model);
-        //}
+        $form  = $this->controller->form->fill($view->model);
+        $old   = $this->controller->request->old();
+        if (count($old) > 0) {
+            $form = $this->controller->form->fill($old);
+        }
 
         if ($view->btnAddAjax) {
             $form->getField('btn_salvar')->addAttributes('data-widget', 'reload');

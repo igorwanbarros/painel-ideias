@@ -25,7 +25,7 @@ class FormLumen extends Form
             $this->addField(Hidden::source('_token', '', csrf_token()));
         }
 
-        $this->addAttributes('class', 'ui form')
+        $this->addAttribute('class', 'ui form')
             ->setFront('semantic')
             ->setBasePath(base_path('app/HtmlViews/Forms/'));
     }

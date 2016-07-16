@@ -2,7 +2,7 @@
 @section('body')
     <section class="ui two column doubling stackable grid container padded">
         <div class="column">
-            Login
+
         </div>
         <div class="column">
             <form class="ui form segment" method="POST" action="{!!url('login')!!}">
@@ -10,12 +10,6 @@
                 <h3 class="header">
                     <i class="lock icon"></i> Acesso ao Sistema
                 </h3>
-
-                @if (count($errors) > 0)
-                    @foreach ($errors->all() as $error)
-                        {{ $error }}
-                    @endforeach
-                @endif
 
                 <div class="ui fluid left icon input">
                     <i class="user icon"></i>
@@ -30,7 +24,27 @@
                 <br>
 
                 <button type="submit" class="ui fluid black button">Login</button>
+
+                @if (count($errors) > 0)
+                <div class="ui negative message">
+                    <i class="close icon"></i>
+                    <div class="header">Ops algo de errado aconteceu</div>
+                    <ul class="list">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                    </ul>
+                </div>
+                @endif
             </form>
         </div>
     </section>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.close').on('click', function () {
+                $(this).closest('.message')
+                    .transition('fade');
+            });
+        })
+    </script>
 @stop

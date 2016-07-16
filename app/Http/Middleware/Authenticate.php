@@ -46,10 +46,15 @@ class Authenticate
                 // Lumen has no Redirector::guest(), this line is put the intended URL to a session like Redirector::guest() does
                 app('session')->put('url.intended', app('url')->full());
                 // Set your login URL here
-                return redirect()->route('login')
-                    ->withErrors([
-                        'error' => $isLogout ? '' : 'Realize o login para acessar a página solicitada.'
+                $redirect = redirect()->route('login');
+
+                if (!$isLogout) {
+                    $redirect->withErrors([
+                        'error' => 'Realize o login para acessar a página solicitada.'
                     ]);
+                }
+
+                return $redirect;
             }
         }
         return $next($request);
