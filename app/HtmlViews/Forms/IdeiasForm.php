@@ -4,20 +4,17 @@
 namespace App\HtmlViews\Forms;
 
 
-use Igorwanbarros\ViewDevelopPhp\Form\Form;
 use Igorwanbarros\ViewDevelopPhp\Form\Fields\Html;
 use Igorwanbarros\ViewDevelopPhp\Form\Fields\Text;
 use Igorwanbarros\ViewDevelopPhp\Form\Fields\Hidden;
 use Igorwanbarros\ViewDevelopPhp\Form\Fields\TextArea;
 
-class IdeiasForm extends Form
+class IdeiasForm extends FormLumen
 {
     public function toStart()
     {
         $this->setAction(url('ideias/salvar'))
             ->setMethod('POST')
-            ->addAttributes('class', 'ui form')
-            ->setFront('semantic')
             ->addField(Html::source('meu_titulo', 'h3', 'Titulo Bla')
                 ->addAttributes('class', 'ui dividing header')
                 ->setSize(16)

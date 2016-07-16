@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
@@ -16,7 +16,10 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        config()->set(['password' => [
+            'cost' => 7,
+            'salt' => 'AosRvasfs03=*aslf30flz'
+        ]]);
     }
 
     /**
@@ -32,8 +35,16 @@ class AuthServiceProvider extends ServiceProvider
         // the User instance via an API token or any other method necessary.
 
         Auth::viaRequest('api', function ($request) {
-            if ($request->input('api_token')) {
-                return User::where('api_token', $request->input('api_token'))->first();
+            if ($request->input('email')) {
+                $user = User::where('email', '=', $request->input('email'))
+                    ->whereNull('deleted_at')
+                    ->first();
+
+                if (isset($user->id) && password_verify($request->input('password'), $user->password)) {
+                    return $user;
+                }
+
+                return null;
             }
         });
     }

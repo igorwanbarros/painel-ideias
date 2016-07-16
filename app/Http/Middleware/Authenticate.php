@@ -1,44 +1,54 @@
 <?php
-
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Contracts\Auth\Factory as Auth;
+use Illuminate\Contracts\Auth\Guard;
 
 class Authenticate
 {
+
     /**
-     * The authentication guard factory instance.
+     * The Guard implementation.
      *
-     * @var \Illuminate\Contracts\Auth\Factory
+     * @var Guard
      */
     protected $auth;
 
+
     /**
-     * Create a new middleware instance.
+     * Create a new filter instance.
      *
-     * @param  \Illuminate\Contracts\Auth\Factory  $auth
-     * @return void
+     * @param  Guard $auth
      */
-    public function __construct(Auth $auth)
+    public function __construct(Guard $auth)
     {
         $this->auth = $auth;
     }
 
+
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  string|null  $guard
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure                 $next
+     *
      * @return mixed
      */
-    public function handle($request, Closure $next, $guard = null)
+    public function handle($request, Closure $next, $permission = NULL)
     {
-        if ($this->auth->guard($guard)->guest()) {
-            return response('Unauthorized.', 401);
+        if ($this->auth->guest()) {
+            if ($request->ajax()) {
+                return response('Unauthorized.', 401);
+            } else {
+                // Lumen has no Redirector::guest(), this line is put the intended URL to a session like Redirector::guest() does
+                app('session')->put('url.intended', app('url')->full());
+                // Set your login URL here
+                return redirect()->route('login')
+                    ->withErrors([
+                        'error' => 'Realize o login para acessar a página solicitada.'
+                    ]);
+            }
         }
-
         return $next($request);
     }
 }

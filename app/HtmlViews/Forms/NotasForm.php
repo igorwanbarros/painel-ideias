@@ -9,16 +9,13 @@ use Igorwanbarros\ViewDevelopPhp\Form\Fields\Hidden;
 use Igorwanbarros\ViewDevelopPhp\Form\Fields\Html;
 use Igorwanbarros\ViewDevelopPhp\Form\Fields\Text;
 use Igorwanbarros\ViewDevelopPhp\Form\Fields\TextArea;
-use Igorwanbarros\ViewDevelopPhp\Form\Form;
 
-class NotasForm extends Form
+class NotasForm extends FormLumen
 {
     public function toStart()
     {
         $this->setMethod('POST')
             ->setAction(url('notas/salvar'))
-            ->addAttributes('class', 'ui form')
-            ->setFront('semantic')
             ->addField(Hidden::source('id'))
             ->addField(Text::source('titulo', 'Título')->setSize(16)->addAttributes('autofocus', ''))
             ->addField(TextArea::source('descricao', 'Descrição')->setSize(16))

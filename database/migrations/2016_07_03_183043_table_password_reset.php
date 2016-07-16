@@ -26,6 +26,6 @@ class TablePasswordReset extends Migration
      */
     public function down()
     {
-        Schemas::drop('password_reset');
+        Schema::drop('password_reset');
     }
 }

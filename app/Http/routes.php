@@ -1,176 +1,289 @@
 <?php
 
-$app->get('/', [
+/*
+ |-----------------------------------------------------------------------------
+ | rotas do AuthController
+ |-----------------------------------------------------------------------------
+*/
+$app->group([
     'namespace' => 'App\Http\Controllers',
-    'uses'      => 'AuthController@index'
-]);
+], function () use ($app) {
 
+    $app->get('/', [
+        'middleware'    => 'auth:dashboard_home',
+        'uses'          => 'DashboardController@index'
+    ]);
+
+    $app->get('/login', [
+        'as'            => 'login',
+        'uses'          => 'AuthController@index'
+    ]);
+
+    $app->post('/login', [
+        'uses'          => 'AuthController@login'
+    ]);
+
+    $app->get('/logout', [
+        'as'            => 'logout',
+        'uses'          => 'AuthController@logout'
+    ]);
+});
+
+
+/*
+ |-----------------------------------------------------------------------------
+ | rotas do DasboardController
+ |-----------------------------------------------------------------------------
+*/
+$app->group([
+    'namespace' => 'App\Http\Controllers',
+], function () use ($app) {
+
+    $app->get('/home', [
+        'middleware'    => 'auth:dashboard_home',
+        'uses'          => 'DashboardController@index'
+    ]);
+
+});
+
+
+/*
+ |-----------------------------------------------------------------------------
+ | rotas do IdeiasController
+ |-----------------------------------------------------------------------------
+*/
 $app->group([
     'namespace' => 'App\Http\Controllers',
     'prefix'    => 'ideias'
 ], function () use ($app) {
 
     $app->get('/', [
-        'uses' => 'IdeiasController@index'
+        'middleware'    => 'auth:ideias_',
+        'uses'          => 'IdeiasController@index'
     ]);
 
     $app->get('/novo', [
-        'uses' => 'IdeiasController@form'
+        'middleware'    => 'auth:ideias_',
+        'uses'          => 'IdeiasController@form'
     ]);
 
     $app->get('/editar/{id}', [
-        'uses' => 'IdeiasController@form'
+        'middleware'    => 'auth:ideias_',
+        'uses'          => 'IdeiasController@form'
     ]);
 
     $app->post('/salvar', [
-        'uses' => 'IdeiasController@store'
+        'middleware'    => 'auth:ideias_',
+        'uses'          => 'IdeiasController@store'
     ]);
 
     $app->get('/excluir/{id}', [
-        'uses' => 'IdeiasController@destroy'
+        'middleware'    => 'auth:ideias_',
+        'uses'          => 'IdeiasController@destroy'
     ]);
-
 });
 
+
+/*
+ |-----------------------------------------------------------------------------
+ | rotas do TagsController
+ |-----------------------------------------------------------------------------
+*/
 $app->group([
     'namespace' => 'App\Http\Controllers',
     'prefix'    => 'tags'
 ], function () use ($app) {
-
     $app->get('/', [
-        'uses' => 'TagsController@index'
+        'middleware'    => 'auth:tags_',
+        'uses'          => 'TagsController@index'
     ]);
 
     $app->get('/novo', [
-        'uses' => 'TagsController@form'
+        'middleware'    => 'auth:tags_',
+        'uses'          => 'TagsController@form'
     ]);
 
     $app->get('/editar/{id}', [
-        'uses' => 'TagsController@form'
+        'middleware'    => 'auth:tags_',
+        'uses'          => 'TagsController@form'
     ]);
 
     $app->post('/salvar', [
-        'uses' => 'TagsController@store'
+        'middleware'    => 'auth:tags_',
+        'uses'          => 'TagsController@store'
     ]);
 
     $app->get('/excluir/{id}', [
-        'uses' => 'TagsController@destroy'
+        'middleware'    => 'auth:tags_',
+        'uses'          => 'TagsController@destroy'
     ]);
 
 });
 
 
+/*
+ |-----------------------------------------------------------------------------
+ | rotas do CheckListController
+ |-----------------------------------------------------------------------------
+*/
 $app->group([
     'namespace' => 'App\Http\Controllers',
     'prefix'    => 'check-list'
 ], function () use ($app) {
 
     $app->get('/', [
-        'uses' => 'CheckListController@index'
+        'middleware'    => 'auth:check-list_',
+        'uses'          => 'CheckListController@index'
     ]);
 
     $app->get('/novo', [
-        'uses' => 'CheckListController@form'
+        'middleware'    => 'auth:check-list_',
+        'uses'          => 'CheckListController@form'
     ]);
 
     $app->get('/editar/{id}', [
-        'uses' => 'CheckListController@form'
+        'middleware'    => 'auth:check-list_',
+        'uses'          => 'CheckListController@form'
     ]);
 
     $app->post('/salvar', [
-        'uses' => 'CheckListController@store'
+        'middleware'    => 'auth:check-list_',
+        'uses'          => 'CheckListController@store'
     ]);
 
     $app->get('/excluir/{id}', [
-        'uses' => 'CheckListController@destroy'
+        'middleware'    => 'auth:check-list_',
+        'uses'          => 'CheckListController@destroy'
     ]);
 
 });
 
 
+/*
+ |-----------------------------------------------------------------------------
+ | rotas do ColunasController
+ |-----------------------------------------------------------------------------
+*/
 $app->group([
     'namespace' => 'App\Http\Controllers',
     'prefix'    => 'colunas'
 ], function () use ($app) {
 
     $app->get('/', [
-        'uses' => 'ColunasController@index'
+        'middleware'    => 'auth:colunas_',
+        'uses'          => 'ColunasController@index'
     ]);
 
     $app->get('/novo', [
-        'uses' => 'ColunasController@form'
+        'middleware'    => 'auth:colunas_',
+        'uses'          => 'ColunasController@form'
     ]);
 
     $app->get('/editar/{id}', [
-        'uses' => 'ColunasController@form'
+        'middleware'    => 'auth:colunas_',
+        'uses'          => 'ColunasController@form'
     ]);
 
     $app->post('/salvar', [
-        'uses' => 'ColunasController@store'
+        'middleware'    => 'auth:colunas_',
+        'uses'          => 'ColunasController@store'
     ]);
 
     $app->get('/excluir/{id}', [
-        'uses' => 'ColunasController@destroy'
+        'middleware'    => 'auth:colunas_',
+        'uses'          => 'ColunasController@destroy'
     ]);
-
 });
 
 
+/*
+ |-----------------------------------------------------------------------------
+ | rotas do NotasController
+ |-----------------------------------------------------------------------------
+*/
 $app->group([
     'namespace' => 'App\Http\Controllers',
     'prefix'    => 'notas'
 ], function () use ($app) {
 
     $app->get('/', [
-        'uses' => 'NotasController@index'
+        'middleware'    => 'auth:notas_',
+        'uses'          => 'NotasController@index'
     ]);
 
     $app->get('/novo', [
-        'uses' => 'NotasController@form'
+        'middleware'    => 'auth:notas_',
+        'uses'          => 'NotasController@form'
     ]);
 
     $app->get('/editar/{id}', [
-        'uses' => 'NotasController@form'
+        'middleware'    => 'auth:notas_',
+        'uses'          => 'NotasController@form'
     ]);
 
     $app->post('/salvar', [
-        'uses' => 'NotasController@store'
+        'middleware'    => 'auth:notas_',
+        'uses'          => 'NotasController@store'
     ]);
 
     $app->get('/excluir/{id}', [
-        'uses' => 'NotasController@destroy'
+        'middleware'    => 'auth:notas_',
+        'uses'          => 'NotasController@destroy'
     ]);
 
 });
 
 
+/*
+ |-----------------------------------------------------------------------------
+ | rotas do PreferenciasController
+ |-----------------------------------------------------------------------------
+*/
 $app->group([
     'namespace' => 'App\Http\Controllers',
     'prefix'    => 'preferencias'
 ], function () use ($app) {
 
     $app->get('/', [
-        'uses' => 'PreferenciasController@index'
+        'middleware'    => 'auth:preferencias_',
+        'uses'          => 'PreferenciasController@index'
     ]);
 
     $app->get('/colunas-usuario', [
-        'uses' => 'PreferenciasController@colunas'
+        'middleware'    => 'auth:preferencias_',
+        'uses'          => 'PreferenciasController@colunas'
     ]);
 
     $app->get('/perfil-usuario', [
-        'uses' => 'PreferenciasController@colunas'
+        'middleware'    => 'auth:preferencias_',
+        'uses'          => 'PreferenciasController@colunas'
     ]);
 
     $app->get('/alterar-senha', [
-        'uses' => 'PreferenciasController@colunas'
+        'middleware'    => 'auth:preferencias_',
+        'uses'          => 'PreferenciasController@colunas'
     ]);
 
     $app->post('/salvar', [
-        'uses' => 'PreferenciasController@store'
+        'middleware'    => 'auth:preferencias_',
+        'uses'          => 'PreferenciasController@store'
     ]);
 
     $app->get('/excluir/{id}', [
-        'uses' => 'PreferenciasController@destroy'
+        'middleware'    => 'auth:preferencias_',
+        'uses'          => 'PreferenciasController@destroy'
     ]);
-
 });
+
+
+/*
+ |-----------------------------------------------------------------------------
+ | rotas do
+ |-----------------------------------------------------------------------------
+*/
+//$app->group([
+//    'namespace' => 'App\Http\Controllers',
+//    'prefix'    => ''
+//], function () use ($app) {
+//
+//});

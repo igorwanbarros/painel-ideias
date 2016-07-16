@@ -27,11 +27,13 @@ class Controller extends BaseController
         $pathInfo = $request->getPathInfo();
         $method   = $request->getMethod();
 
-        if (!isset($this->view->urlBase))
+        if (!isset($this->view->urlBase)) {
             $this->_getUrlBase();
+        }
 
-        if (!isset($this->title) || $this->title == null)
+        if (!isset($this->title) || $this->title == null) {
             $this->title = "%s {$this->controllerName}";
+        }
 
         $this->view->currentRoute   = $method.$pathInfo;
         $this->view->btnAddAjax     = false;
@@ -40,13 +42,15 @@ class Controller extends BaseController
 
     public function render($view, array $array = [])
     {
-        if (!isset($this->view->title))
+        if (!isset($this->view->title)) {
             $this->view->title = $this->title;
+        }
 
         $params = (array) $this->view;
 
-        if (count($array) > 0)
+        if (count($array) > 0) {
             $params = array_merge($params, $array);
+        }
 
         return view($view)->with($params);
     }

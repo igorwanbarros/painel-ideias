@@ -2,11 +2,7 @@
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-try {
-    (new Dotenv\Dotenv(__DIR__.'/../'))->load();
-} catch (Dotenv\Exception\InvalidPathException $e) {
-    //
-}
+Dotenv::load(__DIR__.'/../');
 
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +19,9 @@ $app = new Laravel\Lumen\Application(
     realpath(__DIR__.'/../')
 );
 
-// $app->withFacades();
+$app->withFacades();
 
-// $app->withEloquent();
+$app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
@@ -59,13 +55,17 @@ $app->singleton(
 |
 */
 
-// $app->middleware([
-//    App\Http\Middleware\ExampleMiddleware::class
-// ]);
+$app->middleware([
+    Illuminate\Cookie\Middleware\EncryptCookies::class,
+    Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+    Illuminate\Session\Middleware\StartSession::class,
+    Illuminate\View\Middleware\ShareErrorsFromSession::class,
+    Laravel\Lumen\Http\Middleware\VerifyCsrfToken::class,
+]);
 
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+$app->routeMiddleware([
+    'auth' => 'App\Http\Middleware\Authenticate',
+]);
 
 /*
 |--------------------------------------------------------------------------
@@ -78,9 +78,8 @@ $app->singleton(
 |
 */
 
-// $app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\AuthServiceProvider::class);
-// $app->register(App\Providers\EventServiceProvider::class);
+$app->register(App\Providers\AppServiceProvider::class);
+$app->register(App\Providers\EventServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------

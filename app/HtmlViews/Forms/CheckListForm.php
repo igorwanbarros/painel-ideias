@@ -6,16 +6,13 @@ namespace App\HtmlViews\Forms;
 use Igorwanbarros\ViewDevelopPhp\Form\Fields\Hidden;
 use Igorwanbarros\ViewDevelopPhp\Form\Fields\Html;
 use Igorwanbarros\ViewDevelopPhp\Form\Fields\Text;
-use Igorwanbarros\ViewDevelopPhp\Form\Form;
 
-class CheckListForm extends Form
+class CheckListForm extends FormLumen
 {
     public function toStart()
     {
         $this->setAction(url('check-list/salvar'))
             ->setMethod('POST')
-            ->setFront('semantic')
-            ->addAttributes('class', 'ui form')
             ->addField(Hidden::source('id'))
             ->addField(Text::source('titulo', 'Titulo')->setSize(9))
             ->addField(Text::source('descricao', 'Descrição')->setSize(9))

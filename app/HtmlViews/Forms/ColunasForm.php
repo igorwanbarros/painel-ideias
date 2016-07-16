@@ -8,16 +8,13 @@ use Igorwanbarros\ViewDevelopPhp\Form\Fields\Hidden;
 use Igorwanbarros\ViewDevelopPhp\Form\Fields\Html;
 use Igorwanbarros\ViewDevelopPhp\Form\Fields\Select;
 use Igorwanbarros\ViewDevelopPhp\Form\Fields\Text;
-use Igorwanbarros\ViewDevelopPhp\Form\Form;
 
-class ColunasForm extends Form
+class ColunasForm extends FormLumen
 {
     public function toStart()
     {
         $this->setMethod('POST')
             ->setAction(url('colunas/salvar'))
-            ->addAttributes('class', 'ui form')
-            ->setFront('semantic')
             ->addField(Hidden::source('id'))
             ->addField(Text::source('nome', 'Título')->setSize(9)->addAttributes('autofocus', ''))
             ->addField(Select::source('painel', 'Painel')->setSize(9)->addOptions(['NOTAS' => 'Notas']))
