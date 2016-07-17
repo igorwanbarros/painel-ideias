@@ -17,7 +17,7 @@ class PreferenciasController extends Controller
         $this->view->table  = $colunasController->index();
         $this->title        = str_replace('%s Coluna', 'Colunas', $colunasController->title);
         $form               = $colunasController->form;
-        $form->addAttributes('data-widget', 'ajax');
+        $form->addAttribute('data-widget', 'ajax');
 
         $this->view->widget = $form;
 

@@ -32,8 +32,9 @@ class ColunasController extends Controller
     public function index()
     {
         return IndexHelper::support($this, null, function($controller) {
-            if ($controller->view->isAjax)
+            if ($controller->view->isAjax) {
                 $controller->view->widget = $controller->view->table;
+            }
         });
     }
 
