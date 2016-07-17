@@ -24,7 +24,7 @@ $isError        = is_object($form->getErrors())
     : false;
 if ($isError) {
     $class  = $form->getAttribute('class');
-    $form->addAttributes('class', $class . ' error');
+    $form->addAttribute('class', $class . ' error');
 }
 ?>
 <form method="<?php echo $form->getMethod() ?>"

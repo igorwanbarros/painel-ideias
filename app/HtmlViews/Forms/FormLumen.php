@@ -47,6 +47,10 @@ class FormLumen extends Form
             $this->rules[$fields->getName()] = '';
         }
 
+        if ($fields->getRules()) {
+            $this->addRules($fields->getName(), $fields->getRules());
+        }
+
         return $this;
     }
 
