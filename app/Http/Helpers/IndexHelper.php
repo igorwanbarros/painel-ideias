@@ -15,7 +15,12 @@ class IndexHelper extends ControllerHelpers
         $view   = $this->controller->view;
         $model  = $this->controller->model;
 
-        $view->model    = $model->all();
+        if ($this->controller->userColumn) {
+            $model = $model->where($this->controller->userColumn, '=', app_session('user_id'));
+        }
+
+        $view->model    = $model->get();
+
         $view->widget   = new PainelView(str_replace('%s', '', $this->controller->title));
 
         if (!isset($view->table))

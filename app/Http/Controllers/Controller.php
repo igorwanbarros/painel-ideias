@@ -14,6 +14,7 @@ class Controller extends BaseController
     public $request;
     public $title;
     public $controllerName;
+    public $userColumn;
 
 
     public function __construct(Request $request, $model = null)
