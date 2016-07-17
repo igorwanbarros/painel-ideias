@@ -38,14 +38,35 @@ class UserController extends Controller
 
     public function form($id = NULL)
     {
-        //dd($this->request->all());
         return FormHelper::support($this, $id);
     }
 
 
     public function store()
     {
-        return StoreHelper::support($this);
+        return StoreHelper::support($this, null, function (UserController $controller) {
+            $controller->validandoPassword();
+        });
+    }
+
+
+    protected function validandoPassword()
+    {
+        $dados = $this->request->all();
+
+        if (isset($dados['password']) && $dados['password'] == '') {
+            unset($dados['password']);
+            unset($dados['re_password']);
+
+            return;
+        }
+
+        if (isset($dados['re_password']) && $dados['password'] == $dados['re_password']) {
+            $dados['password']      = bcrypt($dados['password']);
+            $dados['re_password']   = $dados['password'];
+        }
+
+        $this->view->customAttributes = $dados;
     }
 
 
