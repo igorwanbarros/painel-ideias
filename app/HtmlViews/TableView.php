@@ -17,4 +17,15 @@ class TableView extends Table
         $this->classThead   = 'center aligned';
         $this->classTfooter = 'center aligned';
     }
+
+
+    public function render($template = null)
+    {
+        $this->collection = $this->collection->paginate(10);
+        $paginator = view('html-element.paginator')->with('paginator', $this->collection);
+
+        $this->setPaginator($paginator->render());
+
+        return parent::render($template);
+    }
 }
