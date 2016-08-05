@@ -16,6 +16,7 @@ class Notas extends ModelBase
         'id',
         'titulo',
         'descricao',
+        'realizado',
     ];
 
 

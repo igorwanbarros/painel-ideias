@@ -17,16 +17,25 @@ function App()
             loader: true
         };
 
-    App.prototype.init = function()
+    this.init = function()
     {
         $('select, .dropdown').dropdown();
         $('.ui.popup, .ui.tooltip').popup();
         $('.ui.modal').modal();
-        $('.ui.checkbox, input[type="checkbox"]').checkbox();
-        self.urlBase = $('#urlBase').data();
+        $('.ui.checkbox, input[type="checkbox"]').checkbox({
+            onChange: function () {
+                var $this = $(this);
+                if ($this.val() != '0') {
+                    $this.val('1');
+                } else {
+                    $this.val('0');
+                }
+            }
+        });
+        self.urlBase = $('#urlBase').data('url');
     };
 
-    App.prototype.make = function (object) {
+    this.make = function (object) {
         object = object.toLowerCase();
 
         if (undefined === factory[object]) {
@@ -37,7 +46,7 @@ function App()
         return new factory[object];
     };
 
-    App.prototype.messageInfo = function(title, text)
+    this.messageInfo = function(title, text)
     {
         messageConfig.heading   = title;
         messageConfig.text      = text;
@@ -50,7 +59,7 @@ function App()
         return this;
     };
 
-    App.prototype.messageWarning = function(title, text)
+    this.messageWarning = function(title, text)
     {
         messageConfig.heading   = title;
         messageConfig.text      = text;
@@ -63,7 +72,7 @@ function App()
         return this;
     };
 
-    App.prototype.btnRemover = function()
+    this.btnRemover = function()
     {
         $('body').on('click', '.ui.icon.red', function(event) {
             event.preventDefault();
@@ -144,13 +153,13 @@ function AppModal()
             bounce:             'bounce'
         };
 
-    AppModal.prototype.show = function () {
+    this.show = function () {
         this.appModal.modal('show');
 
         return this;
     };
 
-    AppModal.prototype.transitions = function (value) {
+    this.transitions = function (value) {
         value = value.toLowerCase().replace(' ', '');
 
         if (undefined == transitions[value])
@@ -161,13 +170,13 @@ function AppModal()
         return this;
     };
 
-    AppModal.prototype.blurring = function (isBlurring) {
+    this.blurring = function (isBlurring) {
         this.appModal.modal('setting', 'blurring', undefined == isBlurring ? true : isBlurring);
 
         return this;
     };
 
-    AppModal.prototype.approveCallback = function(callback)
+    this.approveCallback = function(callback)
     {
         if (typeof callback == 'function')
             this.appModal.modal('setting', 'onApprove', callback);
@@ -175,7 +184,7 @@ function AppModal()
         return this;
     };
 
-    AppModal.prototype.denyCallback = function(callback)
+    this.denyCallback = function(callback)
     {
         if (typeof callback == 'function')
             this.appModal.modal('setting', 'onDeny', callback);
@@ -183,21 +192,21 @@ function AppModal()
         return this;
     };
 
-    AppModal.prototype.setTitle = function(titulo)
+    this.setTitle = function(titulo)
     {
         this.appModal.find('#app-modal-title').text(titulo);
 
         return this;
     };
 
-    AppModal.prototype.setContent = function(html)
+    this.setContent = function(html)
     {
         this.appModal.find('#app-modal-content').html(html);
 
         return this;
     };
 
-    AppModal.prototype.enableButtons = function(buttonOk, buttonCancel)
+    this.enableButtons = function(buttonOk, buttonCancel)
     {
         buttonOk == true
             ? this.appModal.find('#app-modal-ok').show()
@@ -209,7 +218,8 @@ function AppModal()
 
         return this;
     };
-    AppModal.prototype.close = function()
+
+    this.close = function()
     {
         this.appModal.find('.close.icon').trigger('click');
         return this;
