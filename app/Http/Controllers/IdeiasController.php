@@ -36,8 +36,9 @@ class IdeiasController extends Controller
             $controller->view->table->callback(function($row) {
                 $data = $row->getData();
                 $tags = null;
-                foreach ($data->tags as $tag)
+                foreach ($data->tags as $tag) {
                     $tags .= $tag->tag->nome . ', ';
+                }
 
                 $data->tags = substr($tags, 0, -2);
             });

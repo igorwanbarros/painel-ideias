@@ -21,7 +21,7 @@ class NotasController extends Controller
             'titulo'        => 'Título',
             'descricao'     => 'Descrição',
             'realizado'     => 'Realizado',
-            'updated_at'    => 'Atualizado em',
+            //'updated_at'    => 'Atualizado em',
         ];
         $this->title    = '<i class="file text icon"></i> %s Nota';
         $this->form     = NotasForm::source();
@@ -32,7 +32,17 @@ class NotasController extends Controller
 
     public function index()
     {
-        return IndexHelper::support($this);
+        return IndexHelper::support($this, null, function ($controller) {
+            $controller->view->table->callback(function ($row) {
+                $data = $row->getData();
+
+                if ($data->realizado == 0) {
+                    $data->realizado = 'Não Realizado';
+                } else {
+                    $data->realizado = 'Realizado';
+                }
+            });
+        });
     }
 
 
