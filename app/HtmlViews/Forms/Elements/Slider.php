@@ -4,9 +4,9 @@
 namespace app\HtmlViews\Forms\Elements;
 
 
-use Igorwanbarros\ViewDevelopPhp\Form\Field;
+use Igorwanbarros\ViewDevelopPhp\Form\Fields\Checkbox;
 
-class Slider extends Field
+class Slider extends Checkbox
 {
     protected $type = 'checkbox';
 

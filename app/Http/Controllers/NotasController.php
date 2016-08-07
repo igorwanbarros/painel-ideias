@@ -21,7 +21,6 @@ class NotasController extends Controller
             'titulo'        => 'Título',
             'descricao'     => 'Descrição',
             'realizado'     => 'Realizado',
-            //'updated_at'    => 'Atualizado em',
         ];
         $this->title    = '<i class="file text icon"></i> %s Nota';
         $this->form     = NotasForm::source();

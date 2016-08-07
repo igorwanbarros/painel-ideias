@@ -59,19 +59,41 @@
             var $this = $(this),
                 params = $this.serialize();
 
-            $.post($this.attr('action'), params, function(response) {
-                if (response) {
-                    app.messageInfo('Sucesso', 'Registro adicionado');
+            $.ajax({
+                type: "POST",
+                url: $this.attr('action'),
+                data: params,
+                success: function (response) {
+                    if (response) {
+                        app.messageInfo('Sucesso', 'Registro adicionado');
 
-                    modal.close();
-                    if ($this.find('[data-widget="reload"]').length > 0)
-                        window.setTimeout(function () {
-                            window.location.reload();
-                        }, 2100);
-                    return true;
+                        modal.close();
+                        if ($this.find('[data-widget="reload"]').length > 0)
+                            window.setTimeout(function () {
+                                window.location.reload();
+                            }, 2100);
+                        return true;
+                    }
+
+                    app.messageWarning('Alerta', 'Não consegui adicionar este registro');
+                },
+                //TODO remover duplicidade
+                error: function (response) {
+                    var errors = response.responseJSON;
+
+                    $.each(errors, function (element, error) {
+                        var errorText = '';
+
+                        $.each(error, function (index, value) {
+                            errorText += '<p class="text red"><i class="warning sign icon"></i>' + value + '</p>';
+                        });
+
+                        $this.addClass('error')
+                            .find('#' + element).after('<div>' + errorText + '</div>')
+                                .parents('div.field').addClass('error');
+                    });
+                    console.log(response.responseJSON);
                 }
-
-                app.messageWarning('Alerta', 'Não consegui adicionar este registro');
             });
         });
     });

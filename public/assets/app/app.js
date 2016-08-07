@@ -53,6 +53,17 @@ function App()
         messageConfig.icon      = 'info';
         messageConfig.loaderBg  = '#6EA3BD';//#e7f3b9'
 
+        $.toast(messageConfig);
+
+        return this;
+    };
+
+    this.messageSuccess = function (title, text)
+    {
+        messageConfig.heading = title;
+        messageConfig.text = text;
+        messageConfig.icon = 'success';
+        messageConfig.loaderBg = '#52BB54';
 
         $.toast(messageConfig);
 
@@ -64,7 +75,7 @@ function App()
         messageConfig.heading   = title;
         messageConfig.text      = text;
         messageConfig.icon      = 'warning';
-        messageConfig.loaderBg  = '#6EA3BD';//#e7f3b9'
+        messageConfig.loaderBg  = '#6EA3BD';
 
 
         $.toast(messageConfig);
@@ -77,45 +88,32 @@ function App()
         $('body').on('click', '.ui.icon.red', function(event) {
             event.preventDefault();
 
-            var $this = $(this);
+            var $this       = $(this),
+                swalConfig  = {
+                    title: 'Deseja excluir este registro?',
+                    text: 'ao executar esta ação o registro não poderá ser revertido',
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    confirmButtonText: 'Sim, desejo excluir',
+                    cancelButtonText: 'Não, desejo cancelar',
+                    closeOnConfirm: true,
+                    closeOnCancel: true
+                },
+                swalCallback = function (isConfirm) {
+                    if (isConfirm) {
+                        $.get($this.attr('href'), function (response) {
+                            if (undefined !== response.status && response.status) {
+                                $this.parents('tr').remove();
+                                self.messageSuccess('Sucesso', 'Registro excluido!');
+                            }
+                        });
+                    } else {
+                        self.messageInfo('Exclusão Cancelada', 'Não se preoculpe nada foi excluido');
+                    }
+                };
 
-            swal({
-                title: 'Deseja excluir este registro?',
-                text: 'ao executar esta ação o registro não poderá ser revertido',
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                confirmButtonText: 'Sim, desejo excluir',
-                cancelButtonText: 'Não, desejo cancelar',
-                closeOnConfirm: false,
-                closeOnCancel: false
-            }, function (isConfirm) {
-
-                if (isConfirm) {
-                    $.get($this.attr('href'), function(response) {
-                        if (undefined !== response.status && response.status) {
-                            $this.parents('tr').remove();
-
-                            swal({
-                                title: 'Sucesso',
-                                text: 'Registro excluido com sucesso!',
-                                timer: 2000,
-                                type: 'success'
-                            });
-                        }
-                    });
-
-                } else {
-//                    swal({
-//                        title:  'Exclusão Cancelada',
-//                        text :  'Não se preoculpe nada foi excluído',
-//                        type:   'error',
-//                        timer:  2000
-//                    });
-                    self.messageInfo('Exclusão Cancelada', 'Não se preoculpe nada foi excluido');
-                    return true;
-                }
-            });
+            swal(swalConfig, swalCallback);
         });
     };
 }

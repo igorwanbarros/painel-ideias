@@ -43,7 +43,7 @@ class FormLumen extends Form
         $button     = TagHtml::source('button', '<i class="search icon"></i>', ['class' => 'ui icon button black']);
         $divSearch  = Html::source('search_div', 'div', $input . $button)
             ->addAttributes('class', 'ui right action input')
-            ->setSize(8);
+            ->setSize(10);
 
         $this->addField(
             Select::source('filters', false)
@@ -54,7 +54,7 @@ class FormLumen extends Form
                 ->addAttributes('id', 'filters')
                 ->addOptions($campos)
                 ->setDefaultOption('Todos')
-                ->setSize(8)
+                ->setSize(6)
         );
         $this->addField($divSearch);
 

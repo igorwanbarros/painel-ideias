@@ -19,6 +19,7 @@ class FormHelper extends ControllerHelpers
 
         $title = sprintf($this->controller->title, $id ? 'Editar' : 'Adicionar');
         $form  = $this->controller->form->fill($view->model);
+        //dd($form->getField('realizado'));
         $old   = $this->controller->request->old();
         if (count($old) > 0) {
             $form = $this->controller->form->fill($old);
