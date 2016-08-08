@@ -28,7 +28,7 @@
                 @if (count($errors) > 0)
                 <div class="ui negative message">
                     <i class="close icon"></i>
-                    <div class="header">Ops algo de errado aconteceu</div>
+                    <div class="header">Acesso negado</div>
                     <ul class="list">
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
