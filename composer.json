@@ -8,6 +8,7 @@
         "php": ">=5.5.9",
         "laravel/lumen-framework": "5.1.*",
         "igorwanbarros/view-develop-php": "dev-master",
+        "igorwanbarros/autenticacao-laravel": "dev-master",
         "vlucas/phpdotenv": "~1.0"
     },
     "require-dev": {

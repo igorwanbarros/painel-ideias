@@ -79,6 +79,7 @@ $app->routeMiddleware([
 */
 
 $app->register(App\Providers\AppServiceProvider::class);
+$app->register(Igorwanbarros\Autenticacao\Providers\AutenticacaoServiceProvider::class);
 $app->register(App\Providers\EventServiceProvider::class);
 
 /*
